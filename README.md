@@ -2,6 +2,8 @@
 
 AI-powered tax review prototype for the GreenGrowth CPAs case study.
 
+**Live demo:** https://mithravardhan.github.io/ledgerproof/
+
 LedgerProof is a static, clickable frontend prototype. It uses hardcoded mock data and simulated AI outputs to demonstrate the interaction model, not production tax logic, OCR, authentication, or backend infrastructure.
 
 ## Run
