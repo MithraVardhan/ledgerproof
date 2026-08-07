@@ -2,8 +2,11 @@
 // Run with: npm install && npm run verify
 // Starts a local server on :4173 if one isn't already running.
 
-const { chromium } = require('playwright');
+const playwright = require('playwright');
 const { spawn } = require('child_process');
+
+// BROWSER=webkit or BROWSER=firefox runs the same suite cross-browser.
+const ENGINE = playwright[process.env.BROWSER || 'chromium'];
 const path = require('path');
 const fs = require('fs');
 
@@ -39,10 +42,13 @@ async function ensureServer() {
 }
 
 async function launchBrowser() {
+  if (process.env.BROWSER && process.env.BROWSER !== 'chromium') {
+    return await ENGINE.launch({ headless: true });
+  }
   try {
-    return await chromium.launch({ channel: 'chrome', headless: true });
+    return await ENGINE.launch({ channel: 'chrome', headless: true });
   } catch {
-    return await chromium.launch({ headless: true });
+    return await ENGINE.launch({ headless: true });
   }
 }
 
